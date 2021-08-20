@@ -1,14 +1,9 @@
 #-------------------Anime Rating Prediction---------------
 
-# STEP-1
-#Identifying the Problem Statement
 #Problem Statement: To predict the Ratings received by the anime releases
 
-#STEP-2
-#Identifying the Target Variable
 #Target Variable: rating
 
-#STEP-3
 #Importing Raw Data
 Anime_Data=read.csv("C:/Users/SHRISTI SAHOO/Desktop/analytics/R Prog/Internship/Anime_Final.csv",
                             na.strings = c(""," ","NA","NULL","[]"),stringsAsFactors = T)
@@ -17,7 +12,6 @@ View(Anime_Data)
 #Target Variable is 'rating' can be viewed
 #rating is a continuous column
 
-#STEP-4
 #Exploring the Dataset
 
 dim(Anime_Data)
@@ -135,7 +129,6 @@ for(gar_cols in garbage_cols){
   Anime_Data[,gar_cols]=NULL
 }
 
-#STEP-5
 #Checking if all the categorical column are factor or not if not it needs to be converted 
 #into factor
 
@@ -144,13 +137,11 @@ str(Anime_Data)
 #Categorical Columns: mediaType, ongoing, sznOfRelease
 #All categorical columns are in factor format
 
-#STEP-6
 #Identifying the Problem Type
 
 #Target Variable: rating
 #Type of Problem : Linear Regression
 
-#STEP-7
 #Checking and Treating Missing Values
 
 colSums(is.na(Anime_Data))
@@ -176,7 +167,6 @@ Anime_Data$watched[is.na(Anime_Data$watched)]=median(Anime_Data$watched,na.rm=T)
 
 colSums(is.na(Anime_Data))
 
-#STEP-8
 #Winsorization
 #Checking the presence of outliers by creating boxplots and treating the outliers
 
@@ -276,7 +266,6 @@ for(outlier_cols in c("eps","duration","watched","watching","wantWatch","dropped
           col=brewer.pal(8,"Paired"),horizontal = T)
 }
 
-#STEP-9
 # Explore each "Potential" predictor for distribution and Quality
 
 colnames(Anime_Data)
@@ -328,7 +317,6 @@ for(bar_cols in cate_cols){
           col=brewer.pal(8,"Paired"))
 }
 
-#STEP-10
 #Bivariate Analysis
 #Visual Relationship between Predictors and Target Variable
 
@@ -347,7 +335,6 @@ for(box_cols in cate_cols){
           col=brewer.pal(8,"Paired"))
 }
 
-# STEP-11
 # Strength of Relationship between predictor and target variable
 
 # Continuous Vs Continuous -> Correlation test
@@ -392,7 +379,6 @@ for (aov_cols in cate_cols){
 #Both mediaType and ongoing are rejected by Null Hypothesis
 #Hence are correlated with the target variable  and considered for the model.
 
-#STEP-12
 #Generating Data for ML
 #Getting Data into Standardization Form
 
@@ -420,7 +406,6 @@ str(PredictorVariable)
 Data_ML=data.frame(TargetVariable,PredictorVariable)
 head(Data_ML)
 
-#STEP-13
 #Performing Sampling
 
 # Sampling | Splitting data into 70% for training 30% for testing
